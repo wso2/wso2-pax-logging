@@ -39,7 +39,7 @@ import org.ops4j.pax.logging.PaxLoggingManager;
  * <p>
  * Since the backport of TLSv1.3 in java (JDK-8248721) the logic of TLS debug traces has been changed.
  * The new TLS debug logger uses a configured JUL logger when you define the system property "javax.net.debug"
- * as empty. The TLS log records contain additional string parameters. They are without format parameters in
+ * as empty. The TLS log records contain additional string parameters. They are without a format parameter in
  * the log message. The {@link JdkHandler} appends them to the end of the TLS log message.
  * <p>
  * The {@link JdkHandler} has the following logging modes for the TLS log records:
@@ -90,8 +90,8 @@ public class JdkHandler extends Handler {
 
         String message;
         try {
-            if (TLS_DEBUG_LOGGER.equals(loggerName)) {
-                // The TLS debug log records contain additional string parameters with attachments
+            if (TLS_DEBUG_LOGGER.equals(loggerName) && isTLSDebugLoggingEnabled()) {
+                // The TLS debug log records contain an additional string parameter with attachments
                 // (hex dumps, handshake messages etc). They are without a format parameter in the log message,
                 // so they are not parsed by the JUL formatter.
                 message = getTLSLogMessage(record);
@@ -168,7 +168,7 @@ public class JdkHandler extends Handler {
      * Checks if TLS debug logging is enabled.
      *
      * @return  Returns <b>true</b> if the value of the system property {@value PaxLoggingConstants#LOGGING_CFG_TLS_LOGGING_MODE}
-     *          is not blank and the TLS logging mode is not <b>no_logging</b>.
+     *          is not blank and the TLS logging mode is not <b>NO_LOGGING_MODE</b>.
      */
     private boolean isTLSDebugLoggingEnabled() {
         String property = System.getProperty(PaxLoggingConstants.LOGGING_CFG_TLS_LOGGING_MODE);
