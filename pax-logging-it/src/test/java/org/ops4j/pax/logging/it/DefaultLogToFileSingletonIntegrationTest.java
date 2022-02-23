@@ -55,7 +55,7 @@ public class DefaultLogToFileSingletonIntegrationTest extends AbstractControlled
         // this configuration sets up default/fallback logger that writes to a file
         return combine(
                 combine(baseConfigure(), defaultLoggingConfig()),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject()
+                mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-api").versionAsInProject()
         );
     }
 

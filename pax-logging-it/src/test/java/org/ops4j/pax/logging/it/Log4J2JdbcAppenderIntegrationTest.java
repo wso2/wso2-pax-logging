@@ -101,7 +101,7 @@ public class Log4J2JdbcAppenderIntegrationTest extends AbstractStdoutInterceptin
 
                 // this fragment is needed for pax-logging-log4j2 to load org.h2.Driver class
                 // it simply adds "Import-Package: org.h2"
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-sample-fragment-log4j2-h2").versionAsInProject().noStart()
+                mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-sample-fragment-log4j2-h2").versionAsInProject().noStart()
         );
     }
 
