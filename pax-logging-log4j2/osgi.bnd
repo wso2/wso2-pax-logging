@@ -19,6 +19,8 @@
 
 Bundle-Activator: org.ops4j.pax.logging.log4j2.internal.Activator
 
+Bundle-ClassPath: ., META-INF/pax-logging-log4j-plugins
+
 Private-Package: \
  org.apache.logging.log4j.core.*; -split-package:=merge-first, \
  org.apache.logging.log4j.layout.*; -split-package:=merge-first, \
@@ -30,6 +32,7 @@ Private-Package: \
 Include-Resource: \
  {maven-resources}, \
  META-INF/maven=target/classes/META-INF/maven, \
+ META-INF/pax-logging-log4j-plugins=target/classes/META-INF/pax-logging-log4j-plugins, \
  META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat=target/classes/META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat, \
  /=target/classes;filter:=*.json;recursive:=false, \
  /=target/classes;filter:=*.xsd;recursive:=false, \
@@ -43,6 +46,22 @@ Export-Package: \
 # for javax.* packages, those that are available in rt.jar (defined in Karaf's etc/jre.properties) are
 # listed here. Remaining ones (like `javax.mail`) are in extra bundle. (see PAXLOGGING-257).
 Import-Package: \
+ com.fasterxml.jackson.annotation ;resolution:=optional, \
+ com.fasterxml.jackson.core ;resolution:=optional, \
+ com.fasterxml.jackson.core.type ;resolution:=optional, \
+ com.fasterxml.jackson.core.util ;resolution:=optional, \
+ com.fasterxml.jackson.databind ;resolution:=optional, \
+ com.fasterxml.jackson.databind.annotation ;resolution:=optional, \
+ com.fasterxml.jackson.databind.deser.std ;resolution:=optional, \
+ com.fasterxml.jackson.databind.module ;resolution:=optional, \
+ com.fasterxml.jackson.databind.node ;resolution:=optional, \
+ com.fasterxml.jackson.databind.ser ;resolution:=optional, \
+ com.fasterxml.jackson.databind.ser.impl ;resolution:=optional, \
+ com.fasterxml.jackson.databind.ser.std ;resolution:=optional, \
+ com.fasterxml.jackson.dataformat.xml ;resolution:=optional, \
+ com.fasterxml.jackson.dataformat.xml.annotation ;resolution:=optional, \
+ com.fasterxml.jackson.dataformat.xml.util ;resolution:=optional, \
+ com.fasterxml.jackson.dataformat.yaml ;resolution:=optional, \
  javax.crypto, \
  javax.lang.model.element; resolution:=optional, \
  javax.lang.model; resolution:=optional, \
@@ -86,3 +105,7 @@ Provide-Capability: \
  org.osgi.service.log.LoggerFactory,\
  org.ops4j.pax.logging.PaxLoggingService,\
  org.osgi.service.cm.ManagedService";uses="org.osgi.service.log"
+Bundle-SymbolicName:org.ops4j.pax.logging.pax-logging-log4j2
+
+# somehow we were getting Export-Package value from log4j-core...
+-removeheaders: Export-Package, Include-Resource, Private-Package
