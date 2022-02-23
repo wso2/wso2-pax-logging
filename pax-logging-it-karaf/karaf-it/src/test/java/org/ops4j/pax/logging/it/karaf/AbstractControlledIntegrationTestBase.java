@@ -98,7 +98,7 @@ public class AbstractControlledIntegrationTestBase {
         }
 
         MavenArtifactUrlReference karaf = maven()
-                .groupId("org.ops4j.pax.logging.karaf")
+                .groupId("org.wso2.org.ops4j.pax.logging")
                 .artifactId("karaf-distribution")
                 .type("zip")
                 .versionAsInProject();

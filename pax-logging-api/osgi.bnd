@@ -72,13 +72,6 @@ Export-Package: \
  org.jboss.logging; version=3.5.3.Final;-split-package:=merge-first; provider=paxlogging, \
  org.jboss.logging; version=3.4.3.Final;-split-package:=merge-first; provider=paxlogging, \
  org.jboss.logging; version=3.3.0.Final;-split-package:=merge-first; provider=paxlogging, \
- org.apache.log4j;-split-package:=merge-first; version=${version.ch.qos.reload4j}; provider=paxlogging, \
- org.apache.log4j.config;-split-package:=merge-first; version=${version.ch.qos.reload4j}; provider=paxlogging, \
- org.apache.log4j.helpers;-split-package:=merge-first; version=${version.ch.qos.reload4j}; provider=paxlogging, \
- org.apache.log4j.or;-split-package:=merge-first; version=${version.ch.qos.reload4j}; provider=paxlogging, \
- org.apache.log4j.pattern;-split-package:=merge-first; version=${version.ch.qos.reload4j}; provider=paxlogging, \
- org.apache.log4j.spi;-split-package:=merge-first; version=${version.ch.qos.reload4j}; provider=paxlogging, \
- org.apache.log4j.xml;-split-package:=merge-first; version=${version.ch.qos.reload4j}; provider=paxlogging, \
  org.apache.logging.log4j;-split-package:=merge-first; version=${version.org.apache.logging.log4j}; provider=paxlogging, \
  org.apache.logging.log4j;-split-package:=merge-first; version=2.9.1; provider=paxlogging, \
  org.apache.logging.log4j;-split-package:=merge-first; version=2.13.3; provider=paxlogging, \
@@ -161,3 +154,4 @@ Import-Package: \
 Include-Resource: \
  {maven-resources}, \
  META-INF/versions/9=target/classes/META-INF/versions/9
+Bundle-SymbolicName:org.ops4j.pax.logging.pax-logging-api
