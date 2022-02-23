@@ -84,3 +84,4 @@ Provide-Capability: \
  org.osgi.service.log.LoggerFactory,\
  org.ops4j.pax.logging.PaxLoggingService,\
  org.osgi.service.cm.ManagedService";uses="org.osgi.service.log"
+Bundle-SymbolicName:org.ops4j.pax.logging.pax-logging-log4j2

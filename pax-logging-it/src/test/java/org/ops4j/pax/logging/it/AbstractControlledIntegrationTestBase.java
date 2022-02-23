@@ -171,22 +171,22 @@ public class AbstractControlledIntegrationTestBase {
     }
 
     protected MavenArtifactProvisionOption paxLoggingApi() {
-        return mavenBundle("org.ops4j.pax.logging", "pax-logging-api")
+        return mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-api")
                 .version(System.getProperty("version.pax-logging")).startLevel(START_LEVEL_TEST_BUNDLE - 1).start();
     }
 
     protected MavenArtifactProvisionOption paxLoggingLog4J2() {
-        return mavenBundle("org.ops4j.pax.logging", "pax-logging-log4j2")
+        return mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-log4j2")
                 .version(System.getProperty("version.pax-logging")).startLevel(START_LEVEL_TEST_BUNDLE - 1).start();
     }
 
     protected MavenArtifactProvisionOption paxLoggingLog4J2Extra() {
-        return mavenBundle("org.ops4j.pax.logging", "pax-logging-log4j2-extra")
+        return mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-log4j2-extra")
                 .version(System.getProperty("version.pax-logging")).startLevel(START_LEVEL_TEST_BUNDLE - 1).noStart();
     }
 
     protected MavenArtifactProvisionOption paxLoggingLogback() {
-        return mavenBundle("org.ops4j.pax.logging", "pax-logging-logback")
+        return mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-logback")
                 .version(System.getProperty("version.pax-logging")).startLevel(START_LEVEL_TEST_BUNDLE - 1).start();
     }
 
