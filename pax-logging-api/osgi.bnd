@@ -130,3 +130,4 @@ Import-Package: \
 Include-Resource: \
  {maven-resources}, \
  META-INF/versions/9=target/classes/META-INF/versions/9
+Bundle-SymbolicName:org.ops4j.pax.logging.pax-logging-api
