@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<all-configurations>
+
+    <!-- test for plain FileAppender -->
+    <configuration id="builtin.file">
+        <appender name="file" class="ch.qos.logback.core.FileAppender">
+            <file>target/logs-logback/file-appender.log</file>
+            <append>false</append>
+            <encoder>
+                <!-- https://logback.qos.ch/manual/layouts.html#ClassicPatternLayout -->
+<!--                <pattern>%c/%C [%p] %m%n</pattern>-->
+                <pattern>%logger/%class [%level] %message%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="file" />
+        </root>
+    </configuration>
+
+    <!-- test for rolling appender and a filter available in fragment bundle -->
+    <configuration id="builtin.rolling">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.layout.TTLLLayout" />
+            </encoder>
+        </appender>
+        <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>target/logs-logback/rf-appender.log</file>
+            <append>true</append>
+            <encoder>
+                <pattern>%logger/%class [%level] %mdc %message%n</pattern>
+            </encoder>
+            <!--
+                A RollingPolicy is responsible for performing the rolling over of the active log file.
+                The RollingPolicy is also responsible for providing the active log file, that is the live
+                file where logging output will be directed.
+                "what"
+                 - ch.qos.logback.core.rolling.FixedWindowRollingPolicy
+                 - ch.qos.logback.core.rolling.TimeBasedRollingPolicy
+                 - ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy
+
+                A TriggeringPolicy controls the conditions under which roll-over occurs. Such conditions include
+                time of day, file size, an external event, the log request or a combination thereof.
+                "when"
+                 - ch.qos.logback.core.rolling.TimeBasedRollingPolicy
+                 - ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy
+                 - ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy
+                 - ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP
+                 - ch.qos.logback.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy
+
+                Both the above policies are required. But if RollingPolicy is both
+                ch.qos.logback.core.rolling.RollingPolicy and ch.qos.logback.core.rolling.TriggeringPolicy,
+                only one is sufficient. These are:
+                 - ch.qos.logback.core.rolling.TimeBasedRollingPolicy
+                 - ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy
+            -->
+            <rollingPolicy class="org.ops4j.pax.logging.logback.extra.AlwaysTriggerPolicy">
+                <fileNamePattern>target/logs-logback/rf-appender.log.%d{yyyy-MM}</fileNamePattern>
+                <maxHistory>5</maxHistory>
+                <totalSizeCap>100KB</totalSizeCap>
+            </rollingPolicy>
+            <filter class="org.ops4j.pax.logging.logback.extra.DebugFilter" />
+        </appender>
+
+        <logger name="my.logger" level="info" additivity="false">
+            <appender-ref ref="file" />
+        </logger>
+        <root level="debug">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for MDC accessed through different APIs -->
+    <configuration id="mdc">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.layout.TTLLLayout" />
+            </encoder>
+        </appender>
+        <appender name="file" class="ch.qos.logback.core.FileAppender">
+            <file>target/logs-logback/mdc-file-appender.log</file>
+            <append>false</append>
+            <encoder>
+                <pattern>%logger/%class [%level] %mdc %message%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="my.logger" level="info" additivity="false">
+            <appender-ref ref="file" />
+        </logger>
+        <root level="debug">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for MDCSiftingAppender -->
+    <configuration id="mdc.appender">
+        <appender name="sift" class="ch.qos.logback.classic.sift.SiftingAppender">
+            <!-- without class, it's ch.qos.logback.classic.sift.MDCBasedDiscriminator -->
+            <discriminator>
+                <key>bundle.name</key>
+                <defaultValue>no-such-bundle</defaultValue>
+            </discriminator>
+            <sift>
+                <appender name="file-${bundle.name}" class="ch.qos.logback.core.FileAppender">
+                    <!-- here we can't use different key (as fixed for Log4J1 with PAXLOGGING-256) -->
+                    <file>target/logs-logback/${bundle.name}-file-appender.log</file>
+                    <append>false</append>
+                    <encoder>
+                        <pattern>%c/%C [%p] {%X} %m%n</pattern>
+                    </encoder>
+                </appender>
+            </sift>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="sift" />
+        </root>
+    </configuration>
+
+    <!-- test for MDCSiftingAppender with arbitrary key -->
+    <configuration id="mdc.appender2">
+        <appender name="sift" class="ch.qos.logback.classic.sift.SiftingAppender">
+            <!-- without class, it's ch.qos.logback.classic.sift.MDCBasedDiscriminator -->
+            <discriminator>
+                <key>my.key</key>
+                <defaultValue>default</defaultValue>
+            </discriminator>
+            <sift>
+                <appender name="file-${my.key}" class="ch.qos.logback.core.FileAppender">
+                    <!-- here we can't use different key (as fixed for Log4J1 with PAXLOGGING-256) -->
+                    <file>target/logs-logback/${my.key}-file-appender.log</file>
+                    <append>false</append>
+                    <encoder>
+                        <pattern>%c/%C [%p] {%X} %m%n</pattern>
+                    </encoder>
+                </appender>
+            </sift>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="sift" />
+        </root>
+    </configuration>
+
+    <!-- test for proper discovery of location -->
+    <configuration id="location">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.layout.TTLLLayout" />
+            </encoder>
+        </appender>
+        <appender name="file" class="ch.qos.logback.core.FileAppender">
+            <file>target/logs-logback/location-file-appender.log</file>
+            <append>false</append>
+            <encoder>
+<!--                <pattern>%C | %M | %F | %L : [%p] %m%n</pattern>-->
+                <pattern>%class | %method | %file | %line : [%level] %message%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="my.logger" level="info" additivity="false">
+            <appender-ref ref="file" />
+        </logger>
+        <!-- needed, because "category" through org.osgi.service.log.LogService is derived from Bundle-SymbolicName -->
+        <logger name="PaxExam-Probe" level="info" additivity="false">
+            <appender-ref ref="file" />
+        </logger>
+        <root level="debug">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!--
+        https://logback.qos.ch/manual/appenders.html#serverSocketAppender
+        test for SocketAppender - it's opposite than the one from Log4J1. It listens, not connects.
+    -->
+    <configuration id="builtin.socket">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.layout.TTLLLayout" />
+            </encoder>
+        </appender>
+        <appender name="s" class="ch.qos.logback.classic.net.server.ServerSocketAppender">
+            <address>localhost</address>
+            <!-- System.setProperty("socketAppender.port", Integer.toString(port)); -->
+            <port>${socketAppender.port}</port>
+            <includeCallerData>true</includeCallerData>
+        </appender>
+
+        <logger name="my.logger" level="info" additivity="false">
+            <appender-ref ref="s" />
+        </logger>
+        <root level="info">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for ch.qos.logback.core.read.ListAppender -->
+    <configuration id="builtin.list">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.layout.TTLLLayout" />
+            </encoder>
+        </appender>
+        <appender name="list" class="ch.qos.logback.core.read.ListAppender" />
+
+        <logger name="my.logger" level="info" additivity="false">
+            <appender-ref ref="list" />
+        </logger>
+        <root level="info">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for custom, OSGi registered PaxAppender -->
+    <configuration id="custom">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.layout.TTLLLayout" />
+            </encoder>
+        </appender>
+        <appender name="any-name" class="org.ops4j.pax.logging.logback.internal.bridges.PaxAppenderDelegate">
+            <!-- Will translate to "(&(objectClass=org.ops4j.pax.logging.spi.PaxAppender)(org.ops4j.pax.logging.appender.name=custom))" -->
+            <paxname>custom</paxname>
+        </appender>
+
+        <logger name="my.logger" level="info" additivity="false">
+            <!--
+                In Log4J1 we had "osgi:custom" refrences.
+                Here we have to be more explicit with the above <appender />
+            -->
+<!--            <appender-ref ref="osgi:custom" />-->
+            <appender-ref ref="any-name" />
+        </logger>
+        <root level="info">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for changing log levels which have to be reflected in JUL loggers -->
+    <configuration id="update.jul">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.layout.TTLLLayout" />
+            </encoder>
+        </appender>
+
+        <logger name="l1" level="warn" />
+        <logger name="l2" level="debug" />
+        <root level="info">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <configuration id="update.jul2">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.layout.TTLLLayout" />
+            </encoder>
+        </appender>
+
+        <logger name="l1" level="debug" />
+        <logger name="l2" level="warn" />
+        <root level="info">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for layout included in logback contrib -->
+    <configuration id="json">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                    <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter" />
+                </layout>
+            </encoder>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for turning on/off the locks -->
+    <configuration id="locks">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.layout.TTLLLayout" />
+            </encoder>
+        </appender>
+
+        <root level="debug">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for JUL reconfiguration -->
+    <configuration id="jul">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>LOGBACK> [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="trace">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for Markers -->
+    <configuration id="markers">
+        <turboFilter class="ch.qos.logback.classic.turbo.MarkerFilter">
+            <marker>pass</marker>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </turboFilter>
+
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%logger/%class [%level] %marker %message%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="debug">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for R7 audit logging -->
+    <configuration id="r7.audit">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%logger/%class [%level] %message%n</pattern>
+            </encoder>
+        </appender>
+
+        <!-- In Logback, AUDIT == ERROR -->
+        <root level="error">
+            <appender-ref ref="console" />
+        </root>
+    </configuration>
+
+    <!-- test for framework events -->
+    <configuration id="frameworkEvents">
+        <appender name="file" class="ch.qos.logback.core.FileAppender">
+            <file>target/logs-logback/framework-events.log</file>
+            <append>false</append>
+            <encoder>
+                <pattern>{%t} %logger [%level] %message%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="file" />
+        </root>
+    </configuration>
+
+    <!-- test for multithreading -->
+    <configuration id="threads">
+        <appender name="file" class="ch.qos.logback.core.FileAppender">
+            <file>target/logs-logback/threading.log</file>
+            <append>false</append>
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} {%t} %logger/%class [%level] %message%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="file" />
+        </root>
+    </configuration>
+
+</all-configurations>
