@@ -69,8 +69,6 @@ public class AllLoggingFacadesIntegrationTest extends AbstractControlledIntegrat
         org.ops4j.pax.logging.avalon.AvalonLogFactory.getLogger(name).info("INFO using Avalon Logging");
         // 5. JBoss Logging
         org.jboss.logging.Logger.getLogger(name).info("INFO using JBoss Logging");
-        // 6. Log4J1 API
-        org.apache.log4j.Logger.getLogger(name).info("INFO using Log4Jv1");
         // 7. Logback - only behind SLF4J
         // 8. Log4J2
         // Log4J2 Logging involves log() methods that pass FQCN
@@ -89,7 +87,6 @@ public class AllLoggingFacadesIntegrationTest extends AbstractControlledIntegrat
         assertTrue(lines.contains("PaxExam-Probe [org.ops4j.pax.logging.it.test] INFO : INFO using Avalon Logging"));
         // here, FQCN is passed, which is explicitly added to message by DefaultServiceLog
         assertTrue(lines.stream().anyMatch(l -> l.startsWith("PaxExam-Probe [org.ops4j.pax.logging.it.test] INFO : INFO using JBoss Logging")));
-        assertTrue(lines.contains("PaxExam-Probe [org.ops4j.pax.logging.it.test] INFO : INFO using Log4Jv1"));
         // here, FQCN is passed, which is explicitly added to message by DefaultServiceLog
         assertTrue(lines.stream().anyMatch(l -> l.startsWith("PaxExam-Probe [org.ops4j.pax.logging.it.test] INFO : INFO using Log4Jv2")));
         assertTrue(lines.contains("PaxExam-Probe [org.ops4j.pax.logging.it.test] INFO : INFO using java.util.logging"));

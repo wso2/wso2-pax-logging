@@ -79,8 +79,6 @@ public class LogbackLocationInfoIntegrationTest extends AbstractStdoutIntercepti
         org.ops4j.pax.logging.avalon.AvalonLogFactory.getLogger(name).info("INFO using Avalon Logging");
         // 5. JBoss Logging
         org.jboss.logging.Logger.getLogger(name).info("INFO using JBoss Logging");
-        // 6. Log4J1 API
-        org.apache.log4j.Logger.getLogger(name).info("INFO using Log4Jv1");
         // 7. Logback - only behind SLF4J
         //
         // 8. Log4J2
@@ -106,13 +104,12 @@ public class LogbackLocationInfoIntegrationTest extends AbstractStdoutIntercepti
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 77 : [INFO] INFO using Juli Logging"));
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 79 : [INFO] INFO using Avalon Logging"));
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 81 : [INFO] INFO using JBoss Logging"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 83 : [INFO] INFO using Log4Jv1"));
         // logback is skipped
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 87 : [INFO] INFO using Log4Jv2"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 89 : [INFO] INFO using java.util.logging"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 91 : [INFO] INFO using LogService"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 95 : [INFO] INFO using PaxLoggingService"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 99 : [INFO] INFO using OSGi R7"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 85 : [INFO] INFO using Log4Jv2"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 87 : [INFO] INFO using java.util.logging"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 89 : [INFO] INFO using LogService"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 93 : [INFO] INFO using PaxLoggingService"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 97 : [INFO] INFO using OSGi R7"));
     }
 
 }
