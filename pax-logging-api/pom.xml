@@ -152,15 +152,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <!--
-                With #456 I'm changing all log4j:log4j artifacts to ch.qos.reload4j:reload4j.
-                In Pax Logging 1.12.x and 2.1.x, this is however used only for the API, not for implementation.
-            -->
-            <groupId>ch.qos.reload4j</groupId>
-            <artifactId>reload4j</artifactId>
-            <scope>provided</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
