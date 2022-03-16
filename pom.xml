@@ -31,7 +31,7 @@
 
     <groupId>org.wso2.org.ops4j.pax.logging</groupId>
     <artifactId>logging</artifactId>
-    <version>2.1.0-wso2v4-SNAPSHOT</version>
+    <version>2.1.0-wso2v4</version>
     <packaging>pom</packaging>
 
     <name>OPS4J Pax Logging (Build POM)</name>
@@ -47,7 +47,7 @@
         <connection>scm:https://github.com/wso2/wso2-pax-logging.git</connection>
         <developerConnection>scm:git:https://github.com/wso2/wso2-pax-logging.git</developerConnection>
         <url>https://github.com/wso2/wso2-pax-logging.git</url>
-        <tag>HEAD</tag>
+        <tag>v2.1.0-wso2v4</tag>
     </scm>
 <repositories>
     <repository>
