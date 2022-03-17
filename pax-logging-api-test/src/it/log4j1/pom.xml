@@ -48,12 +48,6 @@
 
         <!-- Logging -->
 
-        <dependency>
-            <groupId>ch.qos.reload4j</groupId>
-            <artifactId>reload4j</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Testing -->
 
         <dependency>

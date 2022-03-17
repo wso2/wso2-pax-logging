@@ -198,15 +198,6 @@ public class Log4j1NativeApiTest {
     }
 
     @Test
-    public void loaderApi() throws Exception {
-        Thread.currentThread().setContextClassLoader(null);
-        // check some internal class and resources from ch.qos.reload4j:reload4j
-        assertNotNull(Loader.loadClass("org.apache.log4j.net.JNDIUtil"));
-        assertNotNull(Loader.getResource("org/apache/log4j/xml/log4j.dtd"));
-        assertNotNull(Loader.getResource("META-INF/maven/ch.qos.reload4j/reload4j/pom.xml"));
-    }
-
-    @Test
     public void logLogApi() throws Exception {
         LogLog.setQuietMode(false);
         LogLog.setInternalDebugging(true);
