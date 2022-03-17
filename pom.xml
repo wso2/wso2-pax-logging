@@ -994,10 +994,8 @@
     </repositories>
 
     <modules>
-        <module>pax-logging-api-java9</module>
         <module>pax-logging-api</module>
         <module>pax-logging-api-test</module>
-        <module>pax-logging-service</module>
         <module>pax-logging-log4j2</module>
         <module>pax-logging-log4j2-extra</module>
         <module>pax-logging-logback</module>
