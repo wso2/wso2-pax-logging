@@ -82,8 +82,6 @@ public class LogbackLocationInfoIntegrationTest extends AbstractStdoutIntercepti
         org.jboss.logging.Logger.getLogger(name).info("INFO using JBoss Logging");
         // 6. Knopflerfish - no special facade
         fishLogService.log(LogService.LOG_INFO, "INFO using Knopflerfish");
-        // 7. Log4J1
-        org.apache.log4j.Logger.getLogger(name).info("INFO using Log4Jv1");
         // 8. Logback - only behind SLF4J
         //
         // 9. Log4J2
@@ -106,7 +104,6 @@ public class LogbackLocationInfoIntegrationTest extends AbstractStdoutIntercepti
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 80 : [INFO] INFO using Avalon Logging"));
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 82 : [INFO] INFO using JBoss Logging"));
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 84 : [INFO] INFO using Knopflerfish"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 86 : [INFO] INFO using Log4Jv1"));
         // logback is skipped
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 90 : [INFO] INFO using Log4Jv2"));
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 92 : [INFO] INFO using java.util.logging"));

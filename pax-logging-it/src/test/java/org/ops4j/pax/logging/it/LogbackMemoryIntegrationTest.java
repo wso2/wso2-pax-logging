@@ -85,9 +85,6 @@ public class LogbackMemoryIntegrationTest extends AbstractControlledIntegrationT
             org.jboss.logging.Logger jbossLogger = org.jboss.logging.Logger.getLogger(name);
             jbossLogger.trace("TRACE through JBoss Logging Logger API");
 
-            org.apache.log4j.Logger log4j1Logger = org.apache.log4j.Logger.getLogger(name);
-            log4j1Logger.trace("TRACE through Log41 v2 API");
-
             org.apache.logging.log4j.Logger log4j2Logger = org.apache.logging.log4j.LogManager.getLogger(name);
             log4j2Logger.trace("TRACE through Log4J v2 API");
         }
