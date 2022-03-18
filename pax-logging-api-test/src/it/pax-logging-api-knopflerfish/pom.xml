@@ -24,12 +24,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.ops4j.pax</groupId>
+        <groupId>org.wso2.org.ops4j.pax.logging</groupId>
         <artifactId>logging</artifactId>
-        <version>1.11.16-SNAPSHOT</version>
+        <version>1.11.16-wso2v1-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.ops4j.pax.logging.test</groupId>
     <artifactId>pax-logging-api-knopflerfish</artifactId>
     <packaging>jar</packaging>
 

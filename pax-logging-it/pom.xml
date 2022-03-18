@@ -24,13 +24,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.ops4j.pax</groupId>
+        <groupId>org.wso2.org.ops4j.pax.logging</groupId>
         <artifactId>logging</artifactId>
-        <version>1.11.16</version>
+        <version>1.11.16-wso2v1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.ops4j.pax.logging</groupId>
     <artifactId>pax-logging-it</artifactId>
     <packaging>jar</packaging>
 
@@ -114,27 +113,21 @@
         <!-- pax-logging own artifacts -->
 
         <dependency>
-            <groupId>org.ops4j.pax.logging</groupId>
+            <groupId>org.wso2.org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-api</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.ops4j.pax.logging</groupId>
-            <artifactId>pax-logging-sample-fragment</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.ops4j.pax.logging</groupId>
+            <groupId>org.wso2.org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-sample-fragment-logback</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.ops4j.pax.logging</groupId>
+            <groupId>org.wso2.org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-sample-fragment-log4j2</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.ops4j.pax.logging</groupId>
+            <groupId>org.wso2.org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-sample-fragment-log4j2-h2</artifactId>
             <scope>provided</scope>
         </dependency>

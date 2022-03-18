@@ -24,13 +24,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.ops4j.pax.logging</groupId>
+        <groupId>org.wso2.org.ops4j.pax.logging</groupId>
         <artifactId>pax-logging-it-karaf</artifactId>
-        <version>1.11.16</version>
+        <version>1.11.16-wso2v1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.ops4j.pax.logging.karaf</groupId>
     <artifactId>karaf-distribution</artifactId>
     <packaging>pom</packaging>
 
@@ -102,7 +101,7 @@
                         <feature>framework</feature>
                     </startupFeatures>
                     <installedBundles>
-                        <bundle>mvn:org.ops4j.pax.logging/pax-logging-log4j2-extra/${project.version}</bundle>
+                        <bundle>mvn:org.wso2.org.ops4j.pax.logging/pax-logging-log4j2-extra/${project.version}</bundle>
                         <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/${version.com.fasterxml.jackson}</bundle>
                         <bundle>mvn:com.fasterxml.jackson.core/jackson-core/${version.com.fasterxml.jackson}</bundle>
                         <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/${version.com.fasterxml.jackson}</bundle>
@@ -123,7 +122,7 @@
             searched for and used as additional feature repositories (with stage equal to the stage of given kar)
         -->
         <dependency>
-            <groupId>org.ops4j.pax.logging.karaf</groupId>
+            <groupId>org.wso2.org.ops4j.pax.logging</groupId>
             <artifactId>karaf-base</artifactId>
             <type>kar</type>
             <scope>compile</scope>

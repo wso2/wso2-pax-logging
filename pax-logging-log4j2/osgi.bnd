@@ -18,6 +18,7 @@
 #
 
 Bundle-Activator: org.ops4j.pax.logging.log4j2.internal.Activator
+Bundle-SymbolicName:org.ops4j.pax.logging.pax-logging-log4j2
 
 Private-Package: \
  org.apache.logging.log4j.core.*; -split-package:=merge-first, \
