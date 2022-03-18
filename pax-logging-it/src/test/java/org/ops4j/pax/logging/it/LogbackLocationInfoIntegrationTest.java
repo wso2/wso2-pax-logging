@@ -105,10 +105,10 @@ public class LogbackLocationInfoIntegrationTest extends AbstractStdoutIntercepti
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 82 : [INFO] INFO using JBoss Logging"));
         assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 84 : [INFO] INFO using Knopflerfish"));
         // logback is skipped
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 90 : [INFO] INFO using Log4Jv2"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 92 : [INFO] INFO using java.util.logging"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 94 : [INFO] INFO using LogService"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 98 : [INFO] INFO using PaxLoggingService"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 88 : [INFO] INFO using Log4Jv2"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 90 : [INFO] INFO using java.util.logging"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 92 : [INFO] INFO using LogService"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.LogbackLocationInfoIntegrationTest | locationInfo | LogbackLocationInfoIntegrationTest.java | 96 : [INFO] INFO using PaxLoggingService"));
     }
 
 }

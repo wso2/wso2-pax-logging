@@ -51,7 +51,6 @@ public class LogReaderIntegrationTest extends AbstractControlledIntegrationTestB
                 combine(baseConfigure(), defaultLoggingConfig()),
 
                 paxLoggingApi(),
-                paxLoggingLog4J1().noStart(),
                 paxLoggingLogback().noStart(),
                 paxLoggingLog4J2().noStart(),
                 configAdmin(),
@@ -66,11 +65,10 @@ public class LogReaderIntegrationTest extends AbstractControlledIntegrationTestB
         ServiceReference<LogReaderService> sr = context.getServiceReference(LogReaderService.class);
         assertNull(sr);
 
-        Bundle paxLoggingLog4J1 = Helpers.paxLoggingService(context);
         Bundle paxLoggingLogback = Helpers.paxLoggingLogback(context);
         Bundle paxLoggingLog4J2 = Helpers.paxLoggingLog4j2(context);
 
-        paxLoggingLog4J1.start();
+        paxLoggingLogback.start();
         sr = context.getServiceReference(LogReaderService.class);
         assertNotNull(sr);
         LogReaderService lrs = context.getService(sr);
@@ -81,27 +79,8 @@ public class LogReaderIntegrationTest extends AbstractControlledIntegrationTestB
             latch1.countDown();
         });
 
-        logger.info("checking log4j1");
-        assertTrue(latch1.await(1, TimeUnit.SECONDS));
-        assertThat(pEntry[0].getMessage(), equalTo("checking log4j1"));
-
-        paxLoggingLog4J1.stop();
-        sr = context.getServiceReference(LogReaderService.class);
-        assertNull(sr);
-
-        paxLoggingLogback.start();
-        sr = context.getServiceReference(LogReaderService.class);
-        assertNotNull(sr);
-        lrs = context.getService(sr);
-        CountDownLatch latch2 = new CountDownLatch(1);
-        pEntry[0] = null;
-        lrs.addLogListener(entry -> {
-            pEntry[0] = entry;
-            latch2.countDown();
-        });
-
         logger.info("checking logback");
-        assertTrue(latch2.await(1, TimeUnit.SECONDS));
+        assertTrue(latch1.await(1, TimeUnit.SECONDS));
         assertThat(pEntry[0].getMessage(), equalTo("checking logback"));
 
         paxLoggingLogback.stop();

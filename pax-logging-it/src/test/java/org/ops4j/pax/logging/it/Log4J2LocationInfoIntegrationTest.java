@@ -108,10 +108,10 @@ public class Log4J2LocationInfoIntegrationTest extends AbstractStdoutInterceptin
         assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 85 : [INFO] INFO using JBoss Logging"));
         assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 87 : [INFO] INFO using Knopflerfish"));
         // logback is skipped
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 93 : [INFO] INFO using Log4Jv2"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 95 : [INFO] INFO using java.util.logging"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 97 : [INFO] INFO using LogService"));
-        assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 101 : [INFO] INFO using PaxLoggingService"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 91 : [INFO] INFO using Log4Jv2"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 93 : [INFO] INFO using java.util.logging"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 95 : [INFO] INFO using LogService"));
+        assertTrue(lines.contains("org.ops4j.pax.logging.it.Log4J2LocationInfoIntegrationTest | locationInfo | Log4J2LocationInfoIntegrationTest.java | 99 : [INFO] INFO using PaxLoggingService"));
     }
 
 }
