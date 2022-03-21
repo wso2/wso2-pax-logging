@@ -26,7 +26,7 @@
     <parent>
         <groupId>org.wso2.org.ops4j.pax.logging</groupId>
         <artifactId>pax-logging-it-karaf</artifactId>
-        <version>1.11.16-wso2v1-SNAPSHOT</version>
+        <version>1.11.16-wso2v1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
