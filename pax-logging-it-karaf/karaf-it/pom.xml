@@ -107,7 +107,7 @@
         <!-- pax-logging own artifacts -->
 
         <dependency>
-            <groupId>org.ops4j.pax.logging.karaf</groupId>
+            <groupId>org.wso2.org.ops4j.pax.logging</groupId>
             <artifactId>karaf-distribution</artifactId>
             <type>zip</type>
         </dependency>

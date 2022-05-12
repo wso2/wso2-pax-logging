@@ -18,6 +18,8 @@
 #
 
 Bundle-Activator: org.ops4j.pax.logging.service.internal.Activator
+Bundle-SymbolicName:org.ops4j.pax.logging.pax-logging-service
+
 
 # See https://bnd.bndtools.org/heads/private_package.html
 #

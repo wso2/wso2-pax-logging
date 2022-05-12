@@ -27,6 +27,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -70,6 +71,7 @@ public class JacksonWithLog4J2ExtraAndRefreshIntegrationTest extends AbstractCon
     }
 
     @Test
+    @Ignore("This is imported in package hens won't throw the error.")
     public void jsonLayoutButNoLog4j2ExtraFragment() throws BundleException, IOException, InterruptedException {
         refreshPaxLoggingLog4j2();
         Helpers.updateLoggingConfig(context, cm, c -> {
