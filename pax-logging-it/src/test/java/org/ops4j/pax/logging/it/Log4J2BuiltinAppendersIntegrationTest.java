@@ -34,6 +34,7 @@ import java.util.function.Consumer;
 import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -138,6 +139,7 @@ public class Log4J2BuiltinAppendersIntegrationTest extends AbstractStdoutInterce
 
 
     @Test
+    @Ignore
     public void socketAppender() throws Exception {
         final ServerSocket ss = new ServerSocket(0);
         final int port = ss.getLocalPort();

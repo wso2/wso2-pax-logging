@@ -73,10 +73,10 @@ public class Log4J1UpdateJULLoggerLevelsIntegrationTest extends AbstractStdoutIn
 
         List<String> lines = readLines();
 
-        assertFalse(lines.contains("[main] INFO l1 - INFO using l1 before"));
-        assertTrue(lines.contains("[main] INFO l2 - INFO using l2 before"));
-        assertTrue(lines.contains("[main] INFO l1 - INFO using l1 after"));
-        assertFalse(lines.contains("[main] INFO l2 - INFO using l2 after"));
+        assertFalse(lines.stream().anyMatch(l-> l.contains("[main] INFO l1 - INFO using l1 before")));
+        assertTrue(lines.stream().anyMatch(l -> l.contains("[main] INFO l2 - INFO using l2 before")));
+        assertTrue(lines.stream().anyMatch(l -> l.contains("[main] INFO l1 - INFO using l1 after")));
+        assertFalse(lines.stream().anyMatch(l -> l.contains("[main] INFO l2 - INFO using l2 after")));
     }
 
 }
