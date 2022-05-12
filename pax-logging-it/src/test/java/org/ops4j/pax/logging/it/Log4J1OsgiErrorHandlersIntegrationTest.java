@@ -62,7 +62,7 @@ public class Log4J1OsgiErrorHandlersIntegrationTest extends AbstractStdoutInterc
                 eventAdmin(),
 
                 // fragment for pax-logging-service
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-sample-fragment").versionAsInProject().noStart()
+                mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-sample-fragment").versionAsInProject().noStart()
         );
     }
 

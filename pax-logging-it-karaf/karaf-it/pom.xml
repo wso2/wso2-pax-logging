@@ -24,13 +24,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.ops4j.pax.logging</groupId>
+        <groupId>org.wso2.org.ops4j.pax.logging</groupId>
         <artifactId>pax-logging-it-karaf</artifactId>
-        <version>1.11.13</version>
+        <version>1.11.13-wso2v1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.ops4j.pax.logging.karaf</groupId>
     <artifactId>karaf-it</artifactId>
     <packaging>jar</packaging>
 

@@ -77,7 +77,7 @@ public class LogbackBuiltinAppendersIntegrationTest extends AbstractStdoutInterc
                 configAdmin(),
                 eventAdmin(),
 
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-sample-fragment-logback").versionAsInProject().noStart()
+                mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-sample-fragment-logback").versionAsInProject().noStart()
         );
     }
 

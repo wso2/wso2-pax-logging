@@ -24,12 +24,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.ops4j.pax.logging</groupId>
+		<groupId>org.wso2.org.ops4j.pax.logging</groupId>
 		<artifactId>pax-logging-samples</artifactId>
-		<version>1.11.13-SNAPSHOT</version>
+		<version>1.11.13-wso2v1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.ops4j.pax.logging</groupId>
 	<artifactId>pax-logging-sample-dynamic</artifactId>
 	<packaging>bundle</packaging>
 
@@ -41,12 +40,12 @@
 	<dependencies>
 
         <dependency>
-            <groupId>org.ops4j.pax.logging</groupId>
+            <groupId>org.wso2.org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-api</artifactId>
         </dependency>
 
         <dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
+			<groupId>org.wso2.org.ops4j.pax.logging</groupId>
 			<artifactId>pax-logging-service</artifactId>
 		</dependency>
 

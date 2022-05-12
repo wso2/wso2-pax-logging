@@ -24,13 +24,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.ops4j.pax</groupId>
+        <groupId>org.wso2.org.ops4j.pax.logging</groupId>
         <artifactId>logging</artifactId>
-        <version>1.11.13</version>
+        <version>1.11.13-wso2v1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.ops4j.pax.logging</groupId>
     <artifactId>pax-logging-log4j2-extra</artifactId>
     <packaging>bundle</packaging>
 
@@ -55,7 +54,7 @@
         <!-- pax-logging own artifacts -->
 
         <dependency>
-            <groupId>org.ops4j.pax.logging</groupId>
+            <groupId>org.wso2.org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-log4j2</artifactId>
             <scope>provided</scope>
         </dependency>

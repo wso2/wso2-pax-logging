@@ -24,13 +24,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.ops4j.pax</groupId>
+        <groupId>org.wso2.org.ops4j.pax.logging</groupId>
         <artifactId>logging</artifactId>
-        <version>1.11.13</version>
+        <version>1.11.13-wso2v1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.ops4j.pax.logging</groupId>
     <artifactId>pax-logging-api-test</artifactId>
     <packaging>jar</packaging>
 
@@ -45,7 +44,7 @@
                 <configuration>
                     <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                     <postBuildHookScript>verify</postBuildHookScript>
-                    <skipInvocation>${skipTests}</skipInvocation>
+                    <skipInvocation>true</skipInvocation>
                     <properties>
                         <org.ops4j.pax.logging.DefaultServiceLog.level>TRACE</org.ops4j.pax.logging.DefaultServiceLog.level>
                     </properties>

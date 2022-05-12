@@ -47,7 +47,7 @@ public class AllLoggingFacadesIntegrationTest extends AbstractControlledIntegrat
     public Option[] configure() throws IOException {
         return combine(
                 combine(baseConfigure(), defaultLoggingConfig()),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject()
+                mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-api").versionAsInProject()
         );
     }
 
