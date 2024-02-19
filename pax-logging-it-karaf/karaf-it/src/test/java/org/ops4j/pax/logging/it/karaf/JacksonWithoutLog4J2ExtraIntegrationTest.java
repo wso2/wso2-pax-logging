@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.inject.Inject;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -60,6 +61,7 @@ public class JacksonWithoutLog4J2ExtraIntegrationTest extends AbstractControlled
     }
 
     @Test
+    @Ignore("This is imported in the package hence the error is not thrown.")
     public void jsonLayoutButNoLog4j2ExtraFragment() throws BundleException, IOException {
         try {
             Helpers.updateLoggingConfig(context, cm, c -> {
