@@ -106,3 +106,6 @@ Provide-Capability: \
  org.ops4j.pax.logging.PaxLoggingService,\
  org.osgi.service.cm.ManagedService";uses="org.osgi.service.log"
 Bundle-SymbolicName:org.ops4j.pax.logging.pax-logging-log4j2
+
+# somehow we were getting Export-Package value from log4j-core...
+-removeheaders: Export-Package, Include-Resource, Private-Package
