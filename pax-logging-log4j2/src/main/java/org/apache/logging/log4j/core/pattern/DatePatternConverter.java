@@ -26,9 +26,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
-import org.apache.logging.log4j.core.util.Constants;
 import org.apache.logging.log4j.core.time.Instant;
 import org.apache.logging.log4j.core.time.MutableInstant;
+import org.apache.logging.log4j.core.util.Constants;
 import org.apache.logging.log4j.core.util.datetime.FastDateFormat;
 import org.apache.logging.log4j.core.util.datetime.FixedDateFormat;
 import org.apache.logging.log4j.core.util.datetime.FixedDateFormat.FixedFormat;
@@ -52,6 +52,10 @@ public final class DatePatternConverter extends LogEventPatternConverter impleme
 
         public String toPattern() {
             return null;
+        }
+
+        public TimeZone getTimeZone() {
+            return TimeZone.getDefault();
         }
     }
 
@@ -83,6 +87,11 @@ public final class DatePatternConverter extends LogEventPatternConverter impleme
         @Override
         public String toPattern() {
             return fastDateFormat.getPattern();
+        }
+
+        @Override
+        public TimeZone getTimeZone() {
+            return fastDateFormat.getTimeZone();
         }
     }
 
@@ -117,6 +126,11 @@ public final class DatePatternConverter extends LogEventPatternConverter impleme
         @Override
         public String toPattern() {
             return fixedDateFormat.getFormat();
+        }
+
+        @Override
+        public TimeZone getTimeZone() {
+            return fixedDateFormat.getTimeZone();
         }
     }
 
@@ -316,16 +330,15 @@ public final class DatePatternConverter extends LogEventPatternConverter impleme
     }
 
     private void formatWithoutThreadLocals(final Instant instant, final StringBuilder output) {
-        CachedTime cached = cachedTime.get();
+        final CachedTime effective;
+        final CachedTime cached = cachedTime.get();
         if (instant.getEpochSecond() != cached.epochSecond || instant.getNanoOfSecond() != cached.nanoOfSecond) {
-            final CachedTime newTime = new CachedTime(instant);
-            if (cachedTime.compareAndSet(cached, newTime)) {
-                cached = newTime;
-            } else {
-                cached = cachedTime.get();
-            }
+            effective = new CachedTime(instant);
+            cachedTime.compareAndSet(cached, effective);
+        } else {
+            effective = cached;
         }
-        output.append(cached.formatted);
+        output.append(effective.formatted);
     }
 
     /**
@@ -358,4 +371,12 @@ public final class DatePatternConverter extends LogEventPatternConverter impleme
         return formatter.toPattern();
     }
 
+    /**
+     * Gets the timezone used by this date format.
+     *
+     * @return the timezone used by this date format.
+     */
+    public TimeZone getTimeZone() {
+        return formatter.getTimeZone();
+    }
 }
