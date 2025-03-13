@@ -52,12 +52,13 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
 
 /**
- * Log4j2 has deprecated {@code org.apache.logging.log4j.core.config.plugins.util.PluginManager#addPackage()} method,
- * so we need to allow Log4j to discover another location of {@code Log4j2Plugins.dat} file.
- * This plugin generates such file into a Jar which will be added to {@code Bundle-ClassPath} OSGi manifest header
- * (because we can't override the file coming from log4j-core...).
+ * Log4j2 has deprecated {@code org.apache.logging.log4j.core.config.plugins.util.PluginManager#addPackage()} method, so
+ * we need to allow Log4j to discover another location of {@code Log4j2Plugins.dat} file. This plugin generates such
+ * file into a Jar which will be added to {@code Bundle-ClassPath} OSGi manifest header (because we can't override the
+ * file coming from log4j-core...).
  */
-@Mojo(name = "generate-log4j-plugin-descriptor", defaultPhase = LifecyclePhase.VERIFY, threadSafe = true, aggregator = true)
+@Mojo(name = "generate-log4j-plugin-descriptor", defaultPhase = LifecyclePhase.VERIFY, threadSafe = true,
+        aggregator = true)
 public class Generate extends AbstractMojo {
 
     @Parameter(defaultValue = "${project}", readonly = true)
@@ -80,7 +81,9 @@ public class Generate extends AbstractMojo {
         ArtifactHandler artifactHandler = project.getArtifact().getArtifactHandler();
         for (Dependency d : project.getDependencies()) {
             ArtifactResolutionRequest req = new ArtifactResolutionRequest();
-            DefaultArtifact artifact = new DefaultArtifact(d.getGroupId(), d.getArtifactId(), d.getVersion(), d.getScope(), d.getType(), d.getClassifier(), artifactHandler);
+            DefaultArtifact artifact =
+                    new DefaultArtifact(d.getGroupId(), d.getArtifactId(), d.getVersion(), d.getScope(), d.getType(),
+                            d.getClassifier(), artifactHandler);
             req.setArtifact(artifact);
             ArtifactResolutionResult result = system.resolve(req);
             if (!result.hasExceptions()) {
@@ -119,9 +122,12 @@ public class Generate extends AbstractMojo {
         foundAnnotations.forEach(p -> pluginMap.computeIfAbsent(p.category(), k -> new ArrayList<>()).add(p));
 
         // see org.apache.logging.log4j.core.config.plugins.processor.PluginCache.loadCacheFiles()
-        File log4jPluginDataJar = new File(project.getBuild().getOutputDirectory(), "META-INF/pax-logging-log4j-plugins/META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat");
+        File log4jPluginDataJar = new File(project.getBuild().getOutputDirectory(),
+                "META-INF/pax-logging-log4j-plugins/META-INF/org/apache/logging/log4j/core/config/plugins" +
+                        "/Log4j2Plugins.dat");
         log4jPluginDataJar.getParentFile().mkdirs();
-        try (final DataOutputStream out = new DataOutputStream(new BufferedOutputStream(Files.newOutputStream(log4jPluginDataJar.toPath())))) {
+        try (final DataOutputStream out = new DataOutputStream(
+                new BufferedOutputStream(Files.newOutputStream(log4jPluginDataJar.toPath())))) {
             out.writeInt(pluginMap.size());
             for (Map.Entry<String, List<Plugin>> entry : pluginMap.entrySet()) {
                 String category = entry.getKey();
@@ -130,7 +136,8 @@ public class Generate extends AbstractMojo {
                 out.writeInt(pluginsInCategory.size());
                 for (Plugin plugin : pluginsInCategory) {
                     // Must always read all parts of the entry, even if not adding, so that the stream progresses
-                    // see org.apache.logging.log4j.core.config.plugins.processor.PluginProcessor.PluginElementVisitor.visitType()
+                    // see org.apache.logging.log4j.core.config.plugins.processor.PluginProcessor
+                    // .PluginElementVisitor.visitType()
                     out.writeUTF(plugin.name().toLowerCase(Locale.ROOT));
                     out.writeUTF(a2c.get(plugin).getName());
                     out.writeUTF(Plugin.EMPTY.equals(plugin.elementType()) ? plugin.name() : plugin.elementType());
@@ -144,7 +151,8 @@ public class Generate extends AbstractMojo {
         }
     }
 
-    private void collectPlugins(ClassLoader loader, Package pkg, List<Plugin> foundAnnotations, Map<Plugin, Class<?>> a2c) {
+    private void collectPlugins(ClassLoader loader, Package pkg, List<Plugin> foundAnnotations,
+                                Map<Plugin, Class<?>> a2c) {
         final ResolverUtil resolver = new ResolverUtil();
         resolver.setClassLoader(loader);
         resolver.findInPackage(new PluginRegistry.PluginTest(), pkg.getName());
