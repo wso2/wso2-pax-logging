@@ -645,24 +645,24 @@
                 <artifactId>pax-logging-sample-fragment-log4j2-h2</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
-                <artifactId>karaf-base</artifactId>
-                <type>kar</type>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
-                <artifactId>karaf-distribution</artifactId>
-                <type>zip</type>
-                <version>${project.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.wso2.org.ops4j.pax.logging</groupId>-->
+<!--                <artifactId>karaf-base</artifactId>-->
+<!--                <type>kar</type>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.wso2.org.ops4j.pax.logging</groupId>-->
+<!--                <artifactId>karaf-distribution</artifactId>-->
+<!--                <type>zip</type>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
 
-            <dependency>
-                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
-                <artifactId>karaf-base-logger</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.wso2.org.ops4j.pax.logging</groupId>-->
+<!--                <artifactId>karaf-base-logger</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
 
             <!-- OPS4J dependencies -->
 
@@ -1064,7 +1064,7 @@
         <module>pax-logging-log4j2-extra</module>
         <module>pax-logging-logback</module>
         <module>pax-logging-it</module>
-        <module>pax-logging-it-karaf</module>
+<!--        <module>pax-logging-it-karaf</module>-->
         <module>pax-logging-samples</module>
     </modules>
 
