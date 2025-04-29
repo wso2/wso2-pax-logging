@@ -24,14 +24,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.ops4j</groupId>
-        <artifactId>master</artifactId>
-        <version>4.3.0</version>
+        <groupId>org.wso2</groupId>
+        <artifactId>wso2</artifactId>
+        <version>1.3</version>
     </parent>
 
-    <groupId>org.ops4j.pax</groupId>
+    <groupId>org.wso2.org.ops4j.pax.logging</groupId>
     <artifactId>logging</artifactId>
-    <version>2.2.2</version>
+    <version>2.2.2-wso2v2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>OPS4J Pax Logging (Build POM)</name>
@@ -44,11 +44,23 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:ops4j/org.ops4j.pax.web.git</connection>
-        <developerConnection>scm:git:git@github.com:ops4j/org.ops4j.pax.logging.git</developerConnection>
-        <url>https://github.com/ops4j/org.ops4j.pax.logging/tree/master</url>
-        <tag>logging-2.2.2</tag>
+        <connection>scm:https://github.com/wso2/wso2-pax-logging.git</connection>
+        <developerConnection>scm:git:https://github.com/wso2/wso2-pax-logging.git</developerConnection>
+        <url>https://github.com/wso2/wso2-pax-logging.git</url>
+        <tag>HEAD</tag>
     </scm>
+    <repositories>
+        <repository>
+            <id>wso2-nexus</id>
+            <name>WSO2 internal Repository</name>
+            <url>https://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
 
     <developers>
         <developer>
@@ -212,38 +224,43 @@
         <version.org.apache.aries.jndi.core>1.0.2</version.org.apache.aries.jndi.core>
         <version.org.apache.aries.util>1.1.3</version.org.apache.aries.util>
         <version.org.apache.avalon.framework>4.3.1</version.org.apache.avalon.framework>
-        <version.org.apache.tomcat.juli>9.0.58</version.org.apache.tomcat.juli>
-        <version.org.apache.xbean>4.20</version.org.apache.xbean>
-        <version.biz.aQute.bnd>6.1.0</version.biz.aQute.bnd>
+        <version.org.apache.tomcat.juli>9.0.98</version.org.apache.tomcat.juli>
+        <version.org.apache.xbean>4.25</version.org.apache.xbean>
+        <version.biz.aQute.bnd>6.4.1</version.biz.aQute.bnd>
         <version.ch.qos.logback>1.3.5</version.ch.qos.logback>
         <version.ch.qos.logback.contrib>0.1.5</version.ch.qos.logback.contrib>
-        <version.ch.qos.reload4j>1.2.24</version.ch.qos.reload4j>
+        <version.ch.qos.reload4j>1.2.25</version.ch.qos.reload4j>
         <version.com.fasterxml.jackson>2.13.3</version.com.fasterxml.jackson>
-        <version.com.h2database>2.1.210</version.com.h2database>
-        <version.commons-io>2.11.0</version.commons-io>
-        <version.commons-logging>1.2</version.commons-logging>
+        <version.com.github.spotbugs>4.8.6</version.com.github.spotbugs>
+        <version.com.h2database>2.2.224</version.com.h2database>
+        <version.commons-io>2.17.0</version.commons-io>
+        <version.commons-logging>1.3.4</version.commons-logging>
         <version.junit>4.13.2</version.junit>
-        <version.org.apache.directory.api>2.1.0</version.org.apache.directory.api>
-        <version.org.apache.karaf>4.3.6</version.org.apache.karaf>
-        <version.org.apache.felix.eventadmin>1.6.2</version.org.apache.felix.eventadmin>
+        <version.org.apache.directory.api>2.1.7</version.org.apache.directory.api>
+        <version.org.apache.karaf>4.3.10</version.org.apache.karaf>
+        <version.org.apache.felix.eventadmin>1.6.4</version.org.apache.felix.eventadmin>
         <version.org.apache.felix.fileinstall>3.6.4</version.org.apache.felix.fileinstall>
-        <version.org.apache.felix.cm.json>1.0.6</version.org.apache.felix.cm.json>
-        <version.org.apache.felix.configadmin>1.9.22</version.org.apache.felix.configadmin>
+        <version.org.apache.felix.cm.json>1.0.8</version.org.apache.felix.cm.json>
+        <version.org.apache.felix.configadmin>1.9.26</version.org.apache.felix.configadmin>
         <version.org.apache.felix6.framework>6.0.5</version.org.apache.felix6.framework>
-        <version.org.apache.felix7.framework>7.0.3</version.org.apache.felix7.framework>
+        <version.org.apache.felix7.framework>7.0.5</version.org.apache.felix7.framework>
         <version.org.apache.logging.log4j>2.20.0</version.org.apache.logging.log4j>
+        <version.org.apache.maven>3.9.9</version.org.apache.maven>
+        <version.org.apache.maven.plugin-tools>3.15.0</version.org.apache.maven.plugin-tools>
         <version.org.apache.servicemix.bundles.javax-inject>1_3</version.org.apache.servicemix.bundles.javax-inject>
         <version.org.apache.sling.commons.johnzon>1.2.14</version.org.apache.sling.commons.johnzon>
+        <!-- 3.5.0.Final is JDK11 only, but we'll export 3.5.3 and 3.6.1 package version anyway -->
         <version.org.jboss.logging>3.4.3.Final</version.org.jboss.logging>
-        <version.org.mockito>4.3.1</version.org.mockito>
+        <!-- 5.x is for JDK11+ -->
+        <version.org.mockito>4.11.0</version.org.mockito>
         <version.org.ops4j.pax.exam>4.13.4</version.org.ops4j.pax.exam>
         <version.org.ops4j.pax.swissbox>1.8.4</version.org.ops4j.pax.swissbox>
-        <version.org.ops4j.pax.url>2.6.11</version.org.ops4j.pax.url>
+        <version.org.ops4j.pax.url>2.6.14</version.org.ops4j.pax.url>
         <version.org.osgi>7.0.0</version.org.osgi>
-        <version.org.osgi.service.jdbc>1.0.1</version.org.osgi.service.jdbc>
-        <version.org.osgi.util.converter>1.0.8</version.org.osgi.util.converter>
+        <version.org.osgi.service.jdbc>1.1.0</version.org.osgi.service.jdbc>
+        <version.org.osgi.util.converter>1.0.9</version.org.osgi.util.converter>
         <version.org.osgi.util.function>1.2.0</version.org.osgi.util.function>
-        <version.org.osgi.util.promise>1.2.0</version.org.osgi.util.promise>
+        <version.org.osgi.util.promise>1.3.0</version.org.osgi.util.promise>
         <version.org.slf4j>2.0.6</version.org.slf4j>
 
         <!-- versions of Maven plugins -->
@@ -256,7 +273,7 @@
         <plugin.maven-clean-plugin>3.1.0</plugin.maven-clean-plugin>
         <plugin.maven-compiler-plugin>3.8.1</plugin.maven-compiler-plugin>
         <plugin.maven-dependency-plugin>3.2.0</plugin.maven-dependency-plugin>
-        <plugin.maven-deploy-plugin>2.8.2</plugin.maven-deploy-plugin>
+        <plugin.maven-deploy-plugin>3.1.0</plugin.maven-deploy-plugin>
         <plugin.maven-enforcer-plugin>3.0.0</plugin.maven-enforcer-plugin>
         <plugin.dependency.org.commonjava.maven.enforcer>1.3</plugin.dependency.org.commonjava.maven.enforcer>
         <plugin.maven-failsafe-plugin>2.22.2</plugin.maven-failsafe-plugin>
@@ -272,15 +289,18 @@
         <plugin.maven-shade-plugin>3.2.4</plugin.maven-shade-plugin>
         <plugin.maven-site-plugin>3.10.0</plugin.maven-site-plugin>
         <plugin.maven-source-plugin>3.2.1</plugin.maven-source-plugin>
-        <plugin.maven-surefire-plugin>2.22.2</plugin.maven-surefire-plugin>
+        <plugin.maven-surefire-plugin>3.1.0</plugin.maven-surefire-plugin>
+        <version.plugin.maven-plugin-plugin>3.9.0</version.plugin.maven-plugin-plugin>
+
 
         <!-- Other Maven plugins (and their dependencies) -->
 <!--        <plugin.apache.apache-rat-plugin>0.13</plugin.apache.apache-rat-plugin>-->
-        <plugin.felix.maven-bundle-plugin>5.1.4</plugin.felix.maven-bundle-plugin>
+        <plugin.codehaus.plexus-component-metadata>2.2.0</plugin.codehaus.plexus-component-metadata>
+        <plugin.felix.maven-bundle-plugin>5.1.9</plugin.felix.maven-bundle-plugin>
         <plugin.mojo.build-helper-maven-plugin>3.3.0</plugin.mojo.build-helper-maven-plugin>
         <plugin.mycila.license-maven-plugin>4.1</plugin.mycila.license-maven-plugin>
         <plugin.servicemix.depends-maven-plugin>1.4.0</plugin.servicemix.depends-maven-plugin>
-<!--        <plugin.sonatype.nexus-staging-maven-plugin>1.6.8</plugin.sonatype.nexus-staging-maven-plugin>-->
+        <plugin.sonatype.nexus-staging-maven-plugin>1.7.0</plugin.sonatype.nexus-staging-maven-plugin>
     </properties>
 
     <build>
@@ -403,8 +423,17 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>${version.plugin.maven-plugin-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>${plugin.maven-release-plugin}</version>
+                    <configuration>
+                        <preparationGoals>clean install</preparationGoals>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -424,6 +453,7 @@
                         <instructions>
                             <Bundle-DocURL>${project.url}</Bundle-DocURL>
                             <_include>-osgi.bnd</_include>
+                            <_bundleannotations />
                         </instructions>
                     </configuration>
                     <dependencies>
@@ -471,6 +501,17 @@
                     <artifactId>license-maven-plugin</artifactId>
                     <version>${plugin.mycila.license-maven-plugin}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.plexus</groupId>
+                    <artifactId>plexus-component-metadata</artifactId>
+                    <version>${plugin.codehaus.plexus-component-metadata}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.wso2.org.ops4j.pax.logging</groupId>
+                    <artifactId>pax-logging-log4j2-maven-plugin</artifactId>
+                    <version>${project.version}</version>
+                </plugin>
 
             </plugins>
         </pluginManagement>
@@ -508,6 +549,13 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
                     <escapeString>\</escapeString>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
 
@@ -562,54 +610,59 @@
             <!-- pax-logging own artifacts -->
 
             <dependency>
-                <groupId>org.ops4j.pax.logging</groupId>
+                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ops4j.pax.logging</groupId>
+                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-logback</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ops4j.pax.logging</groupId>
+                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-log4j2</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
+                <artifactId>pax-logging-log4j2-maven-plugin</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.ops4j.pax.logging</groupId>
+                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-sample-fragment-logback</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ops4j.pax.logging</groupId>
+                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-sample-fragment-log4j2</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ops4j.pax.logging</groupId>
+                <groupId>org.wso2.org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-sample-fragment-log4j2-h2</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.logging.karaf</groupId>
-                <artifactId>karaf-base</artifactId>
-                <type>kar</type>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.logging.karaf</groupId>
-                <artifactId>karaf-distribution</artifactId>
-                <type>zip</type>
-                <version>${project.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.wso2.org.ops4j.pax.logging</groupId>-->
+<!--                <artifactId>karaf-base</artifactId>-->
+<!--                <type>kar</type>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.wso2.org.ops4j.pax.logging</groupId>-->
+<!--                <artifactId>karaf-distribution</artifactId>-->
+<!--                <type>zip</type>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
 
-            <dependency>
-                <groupId>org.ops4j.pax.logging.karaf</groupId>
-                <artifactId>karaf-base-logger</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.wso2.org.ops4j.pax.logging</groupId>-->
+<!--                <artifactId>karaf-base-logger</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
 
             <!-- OPS4J dependencies -->
 
@@ -852,11 +905,6 @@
                 <version>${version.org.jboss.logging}</version>
             </dependency>
 
-            <dependency>
-                <groupId>ch.qos.reload4j</groupId>
-                <artifactId>reload4j</artifactId>
-                <version>${version.ch.qos.reload4j}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
@@ -938,6 +986,24 @@
                 </exclusions>
             </dependency>
 
+            <!-- Maven -->
+
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-core</artifactId>
+                <version>${version.org.apache.maven}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-plugin-api</artifactId>
+                <version>${version.org.apache.maven}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-annotations</artifactId>
+                <version>${version.org.apache.maven.plugin-tools}</version>
+            </dependency>
+
             <!-- Other -->
 
             <dependency>
@@ -993,11 +1059,12 @@
     <modules>
         <module>pax-logging-api</module>
         <module>pax-logging-api-test</module>
+        <module>pax-logging-log4j2-maven-plugin</module>
         <module>pax-logging-log4j2</module>
         <module>pax-logging-log4j2-extra</module>
         <module>pax-logging-logback</module>
         <module>pax-logging-it</module>
-        <module>pax-logging-it-karaf</module>
+<!--        <module>pax-logging-it-karaf</module>-->
         <module>pax-logging-samples</module>
     </modules>
 
@@ -1097,5 +1164,4 @@
         </profile>
 
     </profiles>
-
 </project>

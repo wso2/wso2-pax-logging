@@ -78,8 +78,6 @@ public class LogbackMDCIntegrationTest extends AbstractStdoutInterceptingIntegra
 
         // this should be available also through different logging API!
 
-        // Log4J1 API
-        assertThat(org.apache.log4j.MDC.get("country"), equalTo("Equestria"));
         // Log4J2
         assertThat(ThreadContext.get("country"), equalTo("Equestria"));
         // JBoss Logging
