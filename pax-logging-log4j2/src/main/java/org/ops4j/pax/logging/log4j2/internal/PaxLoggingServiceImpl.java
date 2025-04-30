@@ -67,7 +67,7 @@ public class PaxLoggingServiceImpl implements PaxLoggingService, ServiceFactory<
 
     private static final String LOGGER_CONTEXT_NAME = "pax-logging";
 
-//    static {
+     static {
 //        PluginManager.addPackage("org.apache.logging.log4j.core");
         // We don't have to add "org.apache.logging.log4j.core", because this package will be handled
         // using default cache file "/META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat"
