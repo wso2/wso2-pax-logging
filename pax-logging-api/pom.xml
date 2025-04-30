@@ -1,46 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
-
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.ops4j.pax</groupId>
+        <groupId>org.wso2.org.ops4j.pax.logging</groupId>
         <artifactId>logging</artifactId>
-        <version>2.2.9</version>
+        <version>2.2.9-wso2v1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.ops4j.pax.logging</groupId>
     <artifactId>pax-logging-api</artifactId>
     <packaging>bundle</packaging>
 
     <name>OPS4J Pax Logging - API</name>
-
     <description>
-        Pax Logging API Library is a collection of logging APIs from different libraries/facades.
-        It supports SLF4J, Commons Logging, JULI Logging, Log4J1 API, Log4J2 API, JBoss Logging and Avalon APIs.
-        Additionally, Pax Logging specific library is available as backend implementation with its specific configuration mechanisms,
-        but it's not required.
+        Pax Logging API Library supporting SLF4J, Commons Logging, JULI Logging, Log4J2 API, JBoss Logging, and Avalon APIs.
     </description>
 
     <build>
@@ -49,17 +26,12 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
-                <configuration>
-
-                </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <!--
-                            Unpack original org.apache.logging.log4j:log4j-api - we'll pick multi-release content later
-                        -->
                         <id>unpack-log4j-api</id>
                         <phase>generate-resources</phase>
                         <goals>
@@ -78,9 +50,7 @@
                     <execution>
                         <id>unpack-sources</id>
                         <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
+                        <goals><goal>unpack</goal></goals>
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
@@ -110,9 +80,7 @@
                     <execution>
                         <id>unpack-avalon-sources</id>
                         <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
+                        <goals><goal>unpack</goal></goals>
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
@@ -125,28 +93,9 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>unpack-reload4j-sources</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>ch.qos.reload4j</groupId>
-                                    <artifactId>reload4j</artifactId>
-                                    <classifier>sources</classifier>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${project.build.directory}/reload4j-sources</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>unpack-tomcat-juli-sources</id>
                         <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
+                        <goals><goal>unpack</goal></goals>
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
@@ -161,9 +110,7 @@
                     <execution>
                         <id>unpack-osgi-cmpn-sources</id>
                         <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
+                        <goals><goal>unpack</goal></goals>
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
@@ -177,15 +124,14 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>copy-selected-packages</id>
                         <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
+                        <goals><goal>copy-resources</goal></goals>
                         <configuration>
                             <outputDirectory>${project.build.outputDirectory}</outputDirectory>
                             <resources>
@@ -200,6 +146,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -207,13 +154,9 @@
                     <execution>
                         <id>copy-sources</id>
                         <phase>generate-resources</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
+                        <goals><goal>run</goal></goals>
                         <configuration>
                             <target>
-                                <echo message="Copying sources to include in sources jar" />
-
                                 <mkdir dir="${project.build.directory}/sources/org/apache/avalon/framework/logger" />
                                 <copy todir="${project.build.directory}/sources/org/apache/avalon/framework/logger">
                                     <fileset dir="${project.build.directory}/avalon-sources/org/apache/avalon/framework/logger" />
@@ -222,18 +165,6 @@
                                 <mkdir dir="${project.build.directory}/sources/org/apache/juli/logging" />
                                 <copy todir="${project.build.directory}/sources/org/apache/juli/logging">
                                     <fileset dir="${project.build.directory}/tomcat-juli-sources/org/apache/juli/logging" />
-                                </copy>
-
-                                <mkdir dir="${project.build.directory}/sources/org/apache/log4j" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/chainsaw" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/jdbc" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/net" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/or/jms" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/or/sax" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/rewrite" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/varia" />
-                                <copy todir="${project.build.directory}/sources/org/apache/log4j">
-                                    <fileset dir="${project.build.directory}/reload4j-sources/org/apache/log4j" />
                                 </copy>
 
                                 <mkdir dir="${project.build.directory}/sources/org/osgi/service/log" />
@@ -249,6 +180,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -256,9 +188,7 @@
                     <execution>
                         <id>enhanced-source-jar</id>
                         <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
+                        <goals><goal>jar</goal></goals>
                         <configuration>
                             <classifier>sources</classifier>
                             <classesDirectory>${project.build.directory}/sources</classesDirectory>
@@ -272,7 +202,6 @@
     <dependencies>
 
         <!-- OSGi -->
-
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>osgi.core</artifactId>
@@ -287,48 +216,32 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Logging -->
-
+        <!-- Logging APIs -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-juli</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.avalon.framework</groupId>
             <artifactId>avalon-framework-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <!--
-                With #456 I'm changing all log4j:log4j artifacts to ch.qos.reload4j:reload4j.
-                In Pax Logging 1.12.x and 2.1.x, this is however used only for the API, not for implementation.
-            -->
-            <groupId>ch.qos.reload4j</groupId>
-            <artifactId>reload4j</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -336,7 +249,6 @@
         </dependency>
 
         <!-- Other -->
-
         <dependency>
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-annotations</artifactId>
@@ -344,7 +256,6 @@
         </dependency>
 
         <!-- Testing -->
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -357,5 +268,4 @@
         </dependency>
 
     </dependencies>
-
 </project>
