@@ -107,8 +107,11 @@ public class ReusableLogEventFactory implements LogEventFactory, LocationAwareLo
                 ThreadContext.getDepth() == 0 ? ThreadContext.EMPTY_STACK : ThreadContext.cloneStack()); // mutable copy
 
         if (THREAD_NAME_CACHING_STRATEGY == ThreadNameCachingStrategy.UNCACHED) {
-            result.setThreadName(Thread.currentThread().getName()); // Thread.getName() allocates Objects on each call
-            result.setThreadPriority(Thread.currentThread().getPriority());
+            Thread currentThread = Thread.currentThread();
+            result.setThreadId(currentThread.getId());
+            // Before JRE 8u102, Thread.getName() allocated objects on each call
+            result.setThreadName(currentThread.getName());
+            result.setThreadPriority(currentThread.getPriority());
         }
         return result;
     }
