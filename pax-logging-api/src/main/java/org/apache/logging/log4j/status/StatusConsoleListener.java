@@ -18,7 +18,6 @@ package org.apache.logging.log4j.status;
 
 import static java.util.Objects.requireNonNull;
 
-import edu.umd.cs.findbugs.annotations.Nullable;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -27,6 +26,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.message.Message;
+import org.jspecify.annotations.Nullable;
 import org.ops4j.pax.logging.PaxLogger;
 import org.ops4j.pax.logging.spi.support.DefaultServiceLog;
 import org.ops4j.pax.logging.spi.support.FallbackLogFactory;
@@ -177,7 +177,7 @@ public class StatusConsoleListener implements StatusListener {
      * Adds package name filters to exclude.
      *
      * @param filters An array of package names to exclude.
-     * @deprecated This method is ineffective and only kept for binary backward compatibility.
+     * @deprecated since 2.23.0, this method is ineffective and only kept for binary backward compatibility.
      */
     @Deprecated
     public void setFilters(final String... filters) {}
