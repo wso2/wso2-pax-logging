@@ -124,23 +124,6 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>unpack-reload4j-sources</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>ch.qos.reload4j</groupId>
-                                    <artifactId>reload4j</artifactId>
-                                    <classifier>sources</classifier>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${project.build.directory}/reload4j-sources</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>unpack-tomcat-juli-sources</id>
                         <phase>generate-resources</phase>
                         <goals>
@@ -221,18 +204,6 @@
                                 <mkdir dir="${project.build.directory}/sources/org/apache/juli/logging" />
                                 <copy todir="${project.build.directory}/sources/org/apache/juli/logging">
                                     <fileset dir="${project.build.directory}/tomcat-juli-sources/org/apache/juli/logging" />
-                                </copy>
-
-                                <mkdir dir="${project.build.directory}/sources/org/apache/log4j" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/chainsaw" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/jdbc" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/net" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/or/jms" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/or/sax" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/rewrite" />
-                                <delete dir="${project.build.directory}/reload4j-sources/org/apache/log4j/varia" />
-                                <copy todir="${project.build.directory}/sources/org/apache/log4j">
-                                    <fileset dir="${project.build.directory}/reload4j-sources/org/apache/log4j" />
                                 </copy>
 
                                 <mkdir dir="${project.build.directory}/sources/org/osgi/service/log" />
