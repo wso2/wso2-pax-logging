@@ -79,7 +79,7 @@ public class Log4J2BuiltinAppendersIntegrationTest extends AbstractStdoutInterce
                 configAdmin(),
                 eventAdmin(),
 
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-sample-fragment-log4j2").versionAsInProject().noStart()
+                mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-sample-fragment-log4j2").versionAsInProject().noStart()
         );
     }
 

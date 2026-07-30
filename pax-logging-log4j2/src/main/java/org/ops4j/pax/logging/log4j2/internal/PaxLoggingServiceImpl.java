@@ -80,7 +80,7 @@ public class PaxLoggingServiceImpl implements PaxLoggingService, ServiceFactory<
 //        PluginManager.addPackage(JsonTemplateLayout.class.getPackage().getName());
 //        PluginManager.addPackage(LoggerResolverFactory.class.getPackage().getName());
 //        PluginManager.addPackage(RecyclerFactoryConverter.class.getPackage().getName());
-//    }
+    }
 
     private final BundleContext m_bundleContext;
 
