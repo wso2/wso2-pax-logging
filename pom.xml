@@ -306,7 +306,6 @@
         <plugin.mojo.build-helper-maven-plugin>3.6.1</plugin.mojo.build-helper-maven-plugin>
         <plugin.mycila.license-maven-plugin>5.1.1</plugin.mycila.license-maven-plugin>
         <plugin.servicemix.depends-maven-plugin>1.5.0</plugin.servicemix.depends-maven-plugin>
-        <plugin.sonatype.central-publishing-maven-plugin>0.11.0</plugin.sonatype.central-publishing-maven-plugin>
         <plugin.sonatype.nexus-staging-maven-plugin>1.7.0</plugin.sonatype.nexus-staging-maven-plugin>
     </properties>
 
@@ -509,11 +508,6 @@
                     <version>${plugin.sonatype.nexus-staging-maven-plugin}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.sonatype.central</groupId>
-                    <artifactId>central-publishing-maven-plugin</artifactId>
-                    <version>${plugin.sonatype.central-publishing-maven-plugin}</version>
-                </plugin>
-                <plugin>
                     <groupId>org.ops4j.pax.exam</groupId>
                     <artifactId>exam-maven-plugin</artifactId>
                     <version>${version.org.ops4j.pax.exam}</version>
@@ -636,18 +630,6 @@
                     <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <!-- you need <server> with such <id> in ~/.m2/repository -->
-                    <publishingServerId>ossrh-central</publishingServerId>
-                    <deploymentName>pax-logging-${project.version}</deploymentName>
-                    <waitUntil>uploaded</waitUntil>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 
