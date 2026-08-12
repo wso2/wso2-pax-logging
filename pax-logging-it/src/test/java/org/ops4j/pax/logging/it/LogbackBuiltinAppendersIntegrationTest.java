@@ -151,7 +151,7 @@ public class LogbackBuiltinAppendersIntegrationTest extends AbstractStdoutInterc
         Thread t = new Thread(() -> {
             Socket s = null;
             try {
-                Thread.sleep(250);
+                Thread.sleep(1000);
                 s = new Socket("localhost", port);
                 s.setSoTimeout(2000);
                 latch1.countDown();
