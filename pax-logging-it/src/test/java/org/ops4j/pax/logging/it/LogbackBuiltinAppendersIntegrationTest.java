@@ -35,7 +35,6 @@ import java.util.function.Consumer;
 import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -138,7 +137,6 @@ public class LogbackBuiltinAppendersIntegrationTest extends AbstractStdoutInterc
     }
 
     @Test
-    @Ignore("Temporarily ignoring due to flaky failure")
     public void socketAppender() throws Exception {
         final ServerSocket ss = new ServerSocket(0);
         final int port = ss.getLocalPort();
@@ -153,7 +151,7 @@ public class LogbackBuiltinAppendersIntegrationTest extends AbstractStdoutInterc
         Thread t = new Thread(() -> {
             Socket s = null;
             try {
-                Thread.sleep(1000);
+                Thread.sleep(250);
                 s = new Socket("localhost", port);
                 s.setSoTimeout(2000);
                 latch1.countDown();
