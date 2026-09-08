@@ -65,7 +65,7 @@ public class JacksonWithLog4J2ExtraAndRefreshIntegrationTest extends AbstractCon
                 mavenBundle("com.fasterxml.jackson.core", "jackson-core").versionAsInProject(),
                 mavenBundle("com.fasterxml.jackson.core", "jackson-databind").versionAsInProject(),
 
-                editConfigurationFilePut("etc/startup.properties", "mvn:org.ops4j.pax.logging/pax-logging-log4j2-extra/" + System.getProperty("version.pax-logging"), "13")
+                editConfigurationFilePut("etc/startup.properties", "mvn:org.wso2.org.ops4j.pax.logging/pax-logging-log4j2-extra/" + System.getProperty("version.pax-logging"), "13")
         );
     }
 
