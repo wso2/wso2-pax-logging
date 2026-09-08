@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogManager;
 
-import org.apache.log4j.helpers.LogLog;
 import org.apache.logging.log4j.util.PaxPropertySource;
 import org.ops4j.pax.logging.OSGIPaxLoggingManager;
 import org.ops4j.pax.logging.PaxLogger;
@@ -71,8 +70,6 @@ public class Activator implements BundleActivator {
         String levelName = BackendSupport.defaultLogLevel(bundleContext);
         DefaultServiceLog.setLogLevel(levelName);
 
-        // Log4j1 debug
-        LogLog.setInternalDebugging(DefaultServiceLog.getStaticLogLevel() <= PaxLogger.LEVEL_DEBUG);
         // Log4j2 debug
         PaxPropertySource.debug = DefaultServiceLog.getStaticLogLevel() <= PaxLogger.LEVEL_DEBUG;
         PaxPropertySource.defaultLevel = levelName;
@@ -132,10 +129,6 @@ public class Activator implements BundleActivator {
         org.jboss.logging.Logger jbossLoggingLogger = org.jboss.logging.Logger.getLogger(name);
         jbossLoggingLogger.info("Enabling JBoss Logging API support.");
 
-        // Log4j1 API
-        org.apache.log4j.Logger.configurePaxLoggingManager(manager);
-        org.apache.log4j.Logger log4j1Logger = org.apache.log4j.Logger.getLogger(name);
-        log4j1Logger.info("Enabling Log4J v1 API support.");
 
         // Log4j2
         org.ops4j.pax.logging.log4jv2.Log4jv2LoggerContext.setPaxLoggingManager(manager);
@@ -193,9 +186,6 @@ public class Activator implements BundleActivator {
         jbossLoggingLogger.info("Disabling JBoss Logging API support.");
         org.ops4j.pax.logging.jbosslogging.PaxLoggingLoggerProvider.setPaxLoggingManager(null);
 
-        org.apache.log4j.Logger log4j1Logger = org.apache.log4j.Logger.getLogger(name);
-        log4j1Logger.info("Disabling Log4J v1 API support.");
-        org.apache.log4j.Logger.configurePaxLoggingManager(null);
 
         org.apache.logging.log4j.Logger log4j2Logger = org.apache.logging.log4j.LogManager.getLogger(getClass());
         log4j2Logger.info("Disabling Log4J v2 API support.");

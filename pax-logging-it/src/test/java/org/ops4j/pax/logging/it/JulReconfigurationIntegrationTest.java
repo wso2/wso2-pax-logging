@@ -53,7 +53,7 @@ public class JulReconfigurationIntegrationTest extends AbstractStdoutInterceptin
     public Option[] configure() throws IOException {
         return combine(
                 baseConfigure(),
-                mavenBundle("org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
+                mavenBundle("org.wso2.org.ops4j.pax.logging", "pax-logging-api").versionAsInProject(),
 
                 configAdmin(),
                 eventAdmin(),
