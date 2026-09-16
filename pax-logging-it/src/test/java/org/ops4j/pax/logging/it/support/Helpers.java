@@ -87,6 +87,45 @@ public class Helpers {
         }
     }
 
+    /**
+     * Starts a pax-logging backend bundle and (when requested) waits until it has been configured.
+     *
+     * <p>A (re)start emits <em>two</em> configuration events: the first one when the activator calls
+     * {@code configureDefaults()}, and - milliseconds later - a second one when Configuration Admin delivers the
+     * {@code org.ops4j.pax.logging} PID to the {@code ManagedService} the activator has just registered. Waiting
+     * only for the first one leaves the second in flight, where it can prematurely release the latch of the next
+     * synchronized helper - {@link #deleteLoggingConfig(BundleContext, ConfigurationAdmin)} for instance - which
+     * then returns before the backend has really been reconfigured. The trailing event is therefore consumed here,
+     * while this handler is still the registered one.</p>
+     */
+    private static void startAndAwaitConfiguration(BundleContext context, Bundle backend, boolean await)
+            throws BundleException, InterruptedException {
+        if (!await) {
+            backend.start();
+            return;
+        }
+
+        final CountDownLatch configured = new CountDownLatch(1);
+        final CountDownLatch trailing = new CountDownLatch(2);
+        EventHandler handler = event -> {
+            configured.countDown();
+            trailing.countDown();
+        };
+        Dictionary<String, Object> props = new Hashtable<>();
+        props.put(EventConstants.EVENT_TOPIC, PaxLoggingConstants.EVENT_ADMIN_CONFIGURATION_TOPIC);
+        ServiceRegistration<EventHandler> sr = context.registerService(EventHandler.class, handler, props);
+        try {
+            backend.start();
+            assertTrue(configured.await(5, TimeUnit.SECONDS));
+            if (context.getServiceReference(ConfigurationAdmin.class) != null) {
+                // best effort - without Configuration Admin there is no second event to wait for
+                trailing.await(5, TimeUnit.SECONDS);
+            }
+        } finally {
+            sr.unregister();
+        }
+    }
+
     public static void restartPaxLoggingLogback(BundleContext context, boolean await) {
         // restart pax-logging-logback to pick up replaced stdout
         // awaits for signal indicating successfull (re)configuration
@@ -94,23 +133,7 @@ public class Helpers {
         if (paxLoggingLogback != null) {
             try {
                 paxLoggingLogback.stop(Bundle.STOP_TRANSIENT);
-
-                final CountDownLatch latch = new CountDownLatch(1);
-                ServiceRegistration<EventHandler> sr = null;
-                if (await) {
-                    EventHandler handler = event -> {
-                        latch.countDown();
-                    };
-                    Dictionary<String, Object> props = new Hashtable<>();
-                    props.put(EventConstants.EVENT_TOPIC, PaxLoggingConstants.EVENT_ADMIN_CONFIGURATION_TOPIC);
-                    sr = context.registerService(EventHandler.class, handler, props);
-                }
-
-                paxLoggingLogback.start();
-                if (await) {
-                    assertTrue(latch.await(5, TimeUnit.SECONDS));
-                    sr.unregister();
-                }
+                startAndAwaitConfiguration(context, paxLoggingLogback, await);
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage(), e);
             }
@@ -124,23 +147,7 @@ public class Helpers {
         if (paxLoggingLog4j2 != null) {
             try {
                 paxLoggingLog4j2.stop(Bundle.STOP_TRANSIENT);
-
-                final CountDownLatch latch = new CountDownLatch(1);
-                ServiceRegistration<EventHandler> sr = null;
-                if (await) {
-                    EventHandler handler = event -> {
-                        latch.countDown();
-                    };
-                    Dictionary<String, Object> props = new Hashtable<>();
-                    props.put(EventConstants.EVENT_TOPIC, PaxLoggingConstants.EVENT_ADMIN_CONFIGURATION_TOPIC);
-                    sr = context.registerService(EventHandler.class, handler, props);
-                }
-
-                paxLoggingLog4j2.start();
-                if (await) {
-                    assertTrue(latch.await(5, TimeUnit.SECONDS));
-                    sr.unregister();
-                }
+                startAndAwaitConfiguration(context, paxLoggingLog4j2, await);
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage(), e);
             }
